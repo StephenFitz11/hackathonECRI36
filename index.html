@@ -15,7 +15,7 @@
   </head>
   <body>
     <div class="windowPane">
-      <h1>API Check</h1>
+      <h1>API Tester</h1>
       <form id="endpointForm">
         <div class="form-group">
           <label for="endpoint">Endpoint</label>
@@ -33,46 +33,55 @@
         <div class="form-group">
           <label for="methodSelect">Method</label>
           <select class="form-control" id="methodSelect">
-            <option>GET</option>
-            <option>POST</option>
-            <option>PUT</option>
-            <option>DELETE</option>
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
           </select>
+        </div>
+        <div class="post-options">
+          <h6>Authentication</h6>
+          <div class="input-group" style="margin-bottom: 15px">
+            <input type="text" class="form-control input-sm" value="username" />
+            <span class="input-group-btn" style="width: 0px"></span>
+            <input type="text" class="form-control input-sm" value="password" />
+          </div>
+          <div class="form-group">
+            <label for="requestBody">JSON Request Body </label>
+            <textarea class="form-control" id="requestBody" rows="3"></textarea>
+          </div>
         </div>
         <button type="submit" id="submitButton" class="btn btn-primary">
           Submit
         </button>
       </form>
-      <div class="card infoCard">
-        <h6 class="card-header infoCardHeader">
-          <strong>Response Code:</strong>
-          <p class="responseCodeNumber"><strong>code</strong></p>
-        </h6>
 
-        <div class="card-body">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Reponse</th>
-                <th scope="col">Time</th>
-                <th scope="col">Headers</th>
-                <th scope="col">JSON</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="responseEntry"></td>
-                <td class="timeEntry"></td>
-                <td class="headersEntry"></td>
-                <td class="objEntry"></td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="showKeysDiv"></div>
-          <button type="button" class="btn btn-info btn-sm showKeysBtn">
-            Show Keys
-          </button>
-        </div>
+      <div class="responsePane">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Reponse</th>
+              <th scope="col">Time</th>
+              <th scope="col">Headers</th>
+              <th scope="col">JSON</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="responseEntry"></td>
+              <td class="timeEntry"></td>
+              <td class="headersEntry"></td>
+              <td class="objEntry">
+                <a
+                  href="./assets/501.jpeg"
+                  download=""
+                  class="badge badge-success"
+                  >Download</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Response Body:</h3>
+        <div class="jsonText"></div>
       </div>
     </div>
 

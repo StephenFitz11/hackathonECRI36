@@ -1,11 +1,11 @@
 {
-    "name": "Sprite",
+    "name": "API Tester",
     "version": "1.0.0",
-    "description": "HALO SPRITE",
+    "description": "API TESTER",
     "manifest_version": 3,
-    "author": "THE BEST DEVS EVER",
+    "author": "Stephen & Drew",
     "action":{
         "default_popup": "index.html",
-        "default_title": "DO THIS WORK?"
+        "default_title": "API Tester"
     }
 }

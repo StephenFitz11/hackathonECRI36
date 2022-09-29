@@ -19,21 +19,6 @@ const createCardElement = () => {
   return card;
 };
 
-const createTable = (div) => {
-  const table = document.createElement('table');
-  table.setAttribute('class', 'table');
-
-  const thead = document.createElement('thead');
-  const tr = document.createElement('tr');
-
-  const responseCode = document.createElement('thead');
-  const thHeaders = document.createElement('thead');
-  const parentKeys = document.createElement('thead');
-  const objects = document.createElement('thead');
-
-  const tbody = document.createElement('tbody');
-};
-
 const createPTags = (obj, html) => {
   const keys = Object.keys(obj);
 
@@ -50,7 +35,7 @@ const createPTags = (obj, html) => {
     const pTag = document.createElement('p');
     pTag.style.margin = '0px';
     pTag.style.padding = '0px';
-    pTag.innerText = `Key Name: ${keyName} 
+    pTag.innerText = `Key Name: ${keyName}
     Data Type: ${keyType}
     Entries: ${keyCount}`;
 
@@ -67,36 +52,63 @@ const getData = (e) => {
   const methodValue = document.getElementById('methodSelect').value;
   let responseObj = {};
   var startTime = performance.now();
-  fetch(TESTINGENDPOINT)
+  fetch(endpointValuePROD)
     .then((response) => {
-      const cardHeader = document.querySelector('.responseCodeNumber');
-      if (response.status === 200) cardHeader.style.color = 'green';
-      else cardHeader.style.color = 'red';
-      cardHeader.innerText = `${response.status}`;
-      console.log('RESPONSE', response);
+      const responseEntry = document.querySelector('.responseEntry');
+      if (response.status === 200) responseEntry.style.color = 'green';
+      else responseEntry.style.color = 'red';
+      responseEntry.innerText = `${response.status}`;
+
+      const headersEntry = document.querySelector('.headersEntry');
+
+      const headers = [...response.headers];
+      let headerString = '';
+      headers.forEach((e) => {
+        headerString += `${e}\n`;
+      });
+
+      headersEntry.innerText = headerString;
 
       return response.json();
     })
     .then((data) => {
-      const card = document.querySelector('.card');
+      const card = document.querySelector('.responsePane');
       card.style.visibility = 'visible';
       const cardText = document.querySelector('.card-text');
       console.log('DATA', data);
-      const showKeysDiv = document.querySelector('.showKeysDiv');
-      createPTags(data, showKeysDiv);
+
+      // createPTags(data, showKeysDiv);
       var endTime = performance.now();
-      console.log(`${endTime - startTime}`);
+
+      const timeEntry = document.querySelector('.timeEntry');
+
+      timeEntry.innerText = `${parseFloat(String(endTime - startTime)).toFixed(
+        2
+      )}ms`;
+
+      const objEntry = document.querySelector('.jsonText');
+      console.log(objEntry);
+      objEntry.innerText = JSON.stringify(data, undefined, 4);
     });
 };
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('SOMETHING');
+  document.querySelector('#methodSelect').addEventListener('input', (e) => {
+    const methodValue = document.querySelector('#methodSelect').value;
+
+    // var text = methodValue.options[methodValue.selectedIndex].text;
+    console.log(methodValue);
+    e.preventDefault();
+    const postOptions = document.querySelector('.post-options');
+    if (methodValue === 'POST') {
+      postOptions.style.display = 'inline';
+    } else {
+      postOptions.style.display = 'none';
+    }
+  });
   document.getElementById('submitButton').addEventListener('click', getData);
-  document.querySelector('.showKeysBtn').addEventListener('click', () => {
-    const currentStyle =
-      document.querySelector('.showKeysDiv').style.visibility;
-    if (currentStyle === 'hidden')
-      document.querySelector('.showKeysDiv').style.visibility = 'visible';
-    else document.querySelector('.showKeysDiv').style.visibility = 'hidden';
+  document.getElementById('submitButton').addEventListener('click', () => {
+    console.log('CLICKED');
   });
 });

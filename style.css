@@ -1,7 +1,7 @@
 .windowPane {
-    height: 200px;
+    height: 500px;
     width: 500px;
-
+    /* overflow:hidden; */
     margin: 10px;
 }
 
@@ -11,5 +11,25 @@
 }
 
 .showKeysDiv {
-    visibility: hidden;
+    visibility: visible;
 }
+
+.responsePane {
+    visibility: hidden;
+    margin-top: 10px;
+}
+
+.post-options {
+    
+    display: none
+}
+
+.jsonText {
+    width: 500px;
+    height: 300px;
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 0.8rem;
+    line-height: 1.2;
+
+    overflow: scroll;
+  }

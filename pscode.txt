@@ -20,3 +20,10 @@
 
     CSS:
         - style it.
+
+
+- Technical Challenges:
+    - Trying to make the return object interactable object. Saving the file to the local computer or local file.
+    - Manipulating the response from the call then getting it into the table. 
+    CSS - hiding the elements based on the form
+    - 
