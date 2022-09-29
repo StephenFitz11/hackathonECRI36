@@ -1,62 +1,75 @@
-import { initializeApp, initializeApp } from 'firebase/app';
+const createCardElement = () => {
+  const card = document.createElement('div');
+  card.setAttribute('class', 'card');
 
-// TODO: Replace the following with your app's Firebase project configuration
-const firebaseConfig = {
-  //...
+  const cardHeader = document.createElement('h5');
+  cardHeader.setAttribute('class', 'card-header');
+  cardHeader.innerText = 'Response';
+  card.appendChild(cardHeader);
+
+  const cardBody = document.createElement('div');
+  cardBody.setAttribute('class', 'card-body');
+  card.appendChild(cardBody);
+
+  const cardContent = document.createElement('p');
+  cardContent.setAttribute('class', 'card-text');
+  cardContent.innerHTML = 'This';
+  cardBody.appendChild(cardContent);
+
+  return card;
 };
 
-import { initializeApp } from 'firebase/app';
-import { collection, getDocs, getFirestore } from 'firebase/firestore/lite';
-// Follow this pattern to import other Firebase services
-// import { } from 'firebase/<s
+const createPTags = (obj, html) => {
+  const keys = Object.keys(obj);
+  const infoObj = {};
+  keys.forEach((keyName) => {
+    let keyType = '';
+    let keyCount = 0;
+    if (Array.isArray(keyName)) {
+      keyType === 'Array';
+      keyCount = obj[keyName].length;
+    } else keyType = typeof obj[keyName];
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+    if (keyType === 'object') keyCount = Object.keys(obj[keyName]).length;
 
-// Get a list of cities from your database
-async function getCities(db) {
-  const citiesCol = collection(db, 'cities');
-  const citySnapshot = await getDocs(citiesCol);
-  const cityList = citySnapshot.docs.map((doc) => doc.data());
-  return cityList;
-}
-const app = initializeApp(firebaseConfig);
-var firebase = require('firebase');
-var firebaseui = require('firebaseui');
-var ui = new firebaseui.auth.AuthUI(firebase.auth());
-var uiConfig = {
-  callbacks: {
-    signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-      // User successfully signed in.
-      // Return type determines whether we continue the redirect automatically
-      // or whether we leave that to developer to handle.
-      return true;
-    },
-    uiShown: function () {
-      // The widget is rendered.
-      // Hide the loader.
-      document.getElementById('loader').style.display = 'none';
-    },
-  },
-  // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-  signInFlow: 'popup',
-  signInSuccessUrl: '<url-to-redirect-to-on-success>',
-  signInOptions: [
-    // Leave the lines as is for the providers you want to offer your users.
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-    firebase.auth.GithubAuthProvider.PROVIDER_ID,
-    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-    firebase.auth.PhoneAuthProvider.PROVIDER_ID,
-  ],
-  // Terms of service url.
-  tosUrl: '<your-tos-url>',
-  // Privacy policy url.
-  privacyPolicyUrl: '<your-privacy-policy-url>',
+    const pTag = document.createElement('p');
+    pTag.style.margin = '0px';
+    pTag.style.padding = '0px';
+    pTag.innerText = `Key Name: ${keyName} 
+    Data Type: ${keyType}
+    Entries: ${keyCount}`;
+    html.appendChild(pTag);
+    html.appendChild(document.createElement('p'));
+  });
+  return infoObj;
+};
+
+// MAKE IT BE ABLE TO DO POST
+const getData = (e) => {
+  e.preventDefault();
+  const TESTINGENDPOINT = 'https://api.imgflip.com/get_memes';
+  const endpointValuePROD = document.getElementById('endpoint').value;
+  const methodValue = document.getElementById('methodSelect').value;
+  let responseObj = {};
+  fetch(TESTINGENDPOINT)
+    .then((response) => {
+      const cardHeader = document.querySelector('.responseCodeNumber');
+      if (response.status === 200) cardHeader.style.color = 'green';
+      else cardHeader.style.color = 'red';
+      cardHeader.innerText = `${response.status}`;
+      return response.json();
+    })
+    .then((data) => {
+      const card = document.querySelector('.card');
+      card.style.visibility = 'visible';
+      const cardText = document.querySelector('.card-text');
+
+      const cardBody = document.querySelector('.card-body');
+      createPTags(data, cardBody);
+    });
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('here');
-  ui.start('#firebaseui-auth-container', uiConfig);
+  console.log('SOMETHING');
+  document.getElementById('submitButton').addEventListener('click', getData);
 });

@@ -1,0 +1,11 @@
+.windowPane {
+    height: 500px;
+    width: 300px;
+
+    margin: 10px;
+}
+
+.infoCard {
+    margin-top: 10px;
+    visibility: visible
+}
