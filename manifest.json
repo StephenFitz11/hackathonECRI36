@@ -1,0 +1,11 @@
+{
+    "name": "Sprite",
+    "version": "1.0.0",
+    "description": "HALO SPRITE",
+    "manifest_version": 3,
+    "author": "THE BEST DEVS EVER",
+    "action":{
+        "default_popup": "index.html",
+        "default_title": "DO THIS WORK?"
+    }
+}

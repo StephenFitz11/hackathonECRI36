@@ -1,0 +1,22 @@
+- API Caller
+    HTML:
+        - text input: to input the text
+        - form to submit
+        - Once submitted (do the logic ) 
+            - some box to appear to show our result
+            - show the result of the request
+                - nested object, data types returns, show all the keys
+            - return the errors 
+            STRETCH: have them enter password to access the api.
+
+        - Create the look of it.
+        - STRETCH GOAL: choose a method - post, delete
+        - STRETCH GOAL: Having some plugin they can interact with the object.
+            - have the JSON file be able to be downloaded
+
+    JS:
+        - fetch requests call the endpoint
+        - logic to parse the reponse and populate our information we need
+
+    CSS:
+        - style it.
