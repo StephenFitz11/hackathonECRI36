@@ -50,7 +50,28 @@
         </h6>
 
         <div class="card-body">
-          <p class="responseCodeText"></p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Reponse</th>
+                <th scope="col">Time</th>
+                <th scope="col">Headers</th>
+                <th scope="col">JSON</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="responseEntry"></td>
+                <td class="timeEntry"></td>
+                <td class="headersEntry"></td>
+                <td class="objEntry"></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="showKeysDiv"></div>
+          <button type="button" class="btn btn-info btn-sm showKeysBtn">
+            Show Keys
+          </button>
         </div>
       </div>
     </div>
